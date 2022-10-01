@@ -39,6 +39,7 @@ public class DatabaseManager {
                     inputStream = rs.getBinaryStream(2);
                 }
             System.out.println("LOADED " + chatId + " FROM DB");
+            System.out.println(inputStream);
             PreparedStatement pst2 = con.prepareStatement("DELETE FROM toPy WHERE chatId = " + chatId);
             pst2.executeUpdate();
             System.out.println("DELETED " + chatId + " FROM DB");
