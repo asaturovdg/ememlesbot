@@ -15,9 +15,14 @@ import java.util.List;
 public class PhotoManager {
 
     public static void receivePhoto(TelegramLongPollingBot bot, Update update) throws TelegramApiException {
-        Document doc = update.getMessage().getDocument();
+        List<PhotoSize> photos = update.getMessage().getPhoto();
+        String photoId = photos.stream()
+                .sorted(Comparator.comparing(PhotoSize::getFileSize).reversed())
+                .findFirst()
+                .orElse(null).getFileId();
+
         GetFile getFile = new GetFile();
-        getFile.setFileId(doc.getFileId());
+        getFile.setFileId(photoId);
         File file = bot.execute(getFile);
         try {
             InputStream is = new URL(file.getFileUrl(bot.getBotToken())).openStream();
@@ -30,11 +35,7 @@ public class PhotoManager {
     public static SendPhoto returnPhoto(Update update) {
 
         long chat_id = update.getMessage().getChatId();
-
-        // Array with photo objects with different sizes
-        // We will get the biggest photo from that array
         List<PhotoSize> photos = update.getMessage().getPhoto();
-        // Know file_id
         String f_id = photos.stream()
                 .sorted(Comparator.comparing(PhotoSize::getFileSize).reversed())
                 .findFirst()
