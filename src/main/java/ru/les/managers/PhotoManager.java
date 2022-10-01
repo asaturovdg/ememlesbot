@@ -22,6 +22,7 @@ public class PhotoManager {
         try {
             InputStream is = new URL(file.getFileUrl(bot.getBotToken())).openStream();
             DatabaseManager.photoToPy(update.getMessage().getChatId(), is);
+            System.out.println("OK!");
         } catch (IOException e) {
             e.printStackTrace();
         }
