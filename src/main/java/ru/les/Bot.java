@@ -46,6 +46,7 @@ public final class Bot extends TelegramLongPollingBot {
             } else if (update.hasMessage() && update.getMessage().hasPhoto()) {
                     PhotoManager.receivePhoto(this, update);
                     execute(PhotoManager.returnPhoto(update));
+                    execute(PhotoManager.returnNewPhoto(update));
             }
         } catch (TelegramApiException e) {
             e.printStackTrace();

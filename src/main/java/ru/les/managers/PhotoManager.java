@@ -1,5 +1,6 @@
 package ru.les.managers;
 
+import org.apache.commons.io.FileUtils;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -44,6 +45,17 @@ public class PhotoManager {
         sendPhoto.setChatId(chat_id);
         sendPhoto.setPhoto(new InputFile().setMedia(f_id));
         sendPhoto.setCaption("Держи");
+        return sendPhoto;
+    }
+
+    public static SendPhoto returnNewPhoto(Update update) {
+
+        long chatId = update.getMessage().getChatId();
+        InputStream inputStream = DatabaseManager.photoFromDB(chatId);
+        SendPhoto sendPhoto = new SendPhoto();
+        sendPhoto.setChatId(chatId);
+        sendPhoto.setPhoto(new InputFile(inputStream, "ememlesbot"));
+        sendPhoto.setCaption("Держи Новое");
         return sendPhoto;
     }
 }
