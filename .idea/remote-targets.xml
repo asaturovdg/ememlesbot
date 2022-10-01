@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="obman" type="ssh/sftp" uuid="158e261a-d77b-418d-a7ba-398d4cbb6aff">
+        <config>
+          <option name="projectRootOnTarget" value="/root/EMemLesBot" />
+          <option name="serverName" value="obman" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="javaVersionString" value="17.0.4" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
