@@ -39,8 +39,8 @@ public class DatabaseManager {
                     inputStream = rs.getBinaryStream(2);
                 }
             System.out.println("LOADED " + chatId + " FROM DB");
-            PreparedStatement pst2 = con.prepareStatement("DELETE FROM toPy WHERE chatId = " + chatId);
-            pst2.executeUpdate();
+            //PreparedStatement pst2 = con.prepareStatement("DELETE FROM toPy WHERE chatId = " + chatId);
+            //pst2.executeUpdate();
             System.out.println("DELETED " + chatId + " FROM DB");
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
