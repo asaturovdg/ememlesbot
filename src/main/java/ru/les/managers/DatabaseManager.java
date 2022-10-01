@@ -31,15 +31,17 @@ public class DatabaseManager {
 
     public static InputStream photoFromDB(long chatId) {
         try (Connection con = DriverManager.getConnection(url, user, password);
-             PreparedStatement pst = con.prepareStatement("SELECT * FROM toPy WHERE chatId = 796496528");
+             PreparedStatement pst = con.prepareStatement("SELECT * FROM toPy WHERE chatId = " + chatId);
              ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     long chId = rs.getLong(1);
                     InputStream inputStream = rs.getBinaryStream(2);
                     return inputStream;
                 }
-            System.out.println("LOADED FROM DB");
-
+            System.out.println("LOADED " + chatId + " FROM DB");
+            PreparedStatement pst2 = con.prepareStatement("DELETE FROM toPy WHERE chatId = " + chatId);
+            pst2.executeUpdate();
+            System.out.println("DELETED " + chatId + " FROM DB");
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
